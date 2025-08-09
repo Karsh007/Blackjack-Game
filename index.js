@@ -12,6 +12,8 @@ let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
+let numberOfTimesClicked = 0;
+let clickCountEl = document.getElementById("click-count");
 
 playerEl.textContent = player.name + ": $" + player.chips
 
@@ -25,8 +27,21 @@ function getRandomCard() {
         return randomNumber
     }
 }
+function openPopup() {
+    document.getElementById("popupOverlay").style.display = "block";
+    document.getElementById("myPopup").style.display = "block";
+  
+}
 
+function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+    document.getElementById("myPopup").style.display = "none";
+}
 function startGame() {
+    openPopup();
+    closePopup();
+    document.getElementById("closeBtn").style.display = "none";
+    document.getElementById("game").style.display = "inline-block";
     isAlive = true
     let firstCard = getRandomCard()
     let secondCard = getRandomCard()
@@ -40,7 +55,6 @@ function renderGame() {
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += cards[i] + " "
     }
-    
     sumEl.textContent = "Sum: " + sum
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -62,4 +76,22 @@ function newCard() {
         cards.push(card)
         renderGame()        
     }
+}
+
+function newGame() {
+    numberOfTimesClicked++;
+    if (clickCountEl) {
+        clickCountEl.textContent = `New Game Clicked: ${numberOfTimesClicked}`;
+    }
+    cards = [];
+    sum = 0;
+    hasBlackJack = false;
+    isAlive = false;
+    message = "Want to play a round?";
+    messageEl.textContent = message;
+    sumEl.textContent = "Sum:";
+    cardsEl.textContent = "Cards:";
+    document.getElementById("closeBtn").style.display = "inline-block";
+    document.getElementById("game").style.display = "none";
+    closePopup();
 }

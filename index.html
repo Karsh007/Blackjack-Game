@@ -7,9 +7,21 @@
         <p id="message-el">Want to play a round?</p>
         <p id="cards-el">Cards:</p>
         <p id="sum-el">Sum:</p>
-        <button onclick="startGame()">START GAME</button>
-        <button onclick="newCard()">NEW CARD</button>
-        <p id="player-el"></p>
+    <button id = "closeBtn" onclick = "openPopup()">START GAME</button>
+        <div class="page-content">
+    <!-- Your main webpage content goes here -->
+<div id="popupOverlay" class="popup-overlay" onclick="startGame()"></div>
+<div id="myPopup" class="popup-box">
+    <div class="popup-content">
+        <h2>Do you want to start the  game</h2>
+       <button onclick="closePopup()">No</button>
+       <button onclick="startGame()">Yes</button>
+    </div>
+</div>
+    <button onclick="newCard()">NEW CARD</button>
+    <button id="game" onclick="newGame()" style="display:none;">New Game</button>
+    <p id="player-el"></p>
+    <p id="click-count">New Game Clicked 0</p>
         <script src="index.js"></script>
     </body>
 </html>
